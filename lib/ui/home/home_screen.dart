@@ -80,7 +80,7 @@ class HomeScreen extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               controller: controller,
               children: <Widget>[
-                Ad(),
+                Ad(), // 컴포넌트 디렉토리에 'ad'파일 만들어서 구현하고, 'Ad()'로 임포트함.
                 Ad(),
                 Ad(),
               ],
