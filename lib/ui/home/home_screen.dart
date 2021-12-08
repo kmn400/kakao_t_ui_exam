@@ -1,90 +1,45 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:kakao_t_ui_exam/ui/bmi_calc/bmi_calc_home_screen.dart';
+import 'package:kakao_t_ui_exam/ui/counter/counter_screen.dart';
+import 'package:kakao_t_ui_exam/ui/kakao_t/kakao_t_screen.dart';
 
-import 'component/ad.dart';
-
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key key}) : super(key: key);
+
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final _screens = [
+    kakaoTScreen(),
+    CounterScreen(),
+    BmiCalcHomeScreen(),
+  ];
+
+  int _index = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: Text(
-          '카카오 T',
-          style: TextStyle(color: Colors.black),
-        ),
-      ),
-      body: _buildBody(),
-    );
-  }
-
-  Widget _buildBody() {
-    final PageController controller = PageController(initialPage: 0);
-    return Padding(
-      padding: const EdgeInsets.all(35.0),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                children: [
-                  Image.network(
-                    'https://cdn.pixabay.com/photo/2021/09/08/15/24/couple-6607143_960_720.jpg',
-                    width: 100,
-                    height: 100,
-                    fit: BoxFit.cover,
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text('택시', style: TextStyle(fontSize: 20)),
-                ],
-              ),
-              Column(
-                children: [
-                  Image.network(
-                    'https://cdn.pixabay.com/photo/2021/09/08/15/24/couple-6607143_960_720.jpg',
-                    width: 100,
-                    height: 100,
-                    fit: BoxFit.cover,
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text('택시', style: TextStyle(fontSize: 20)),
-                ],
-              ),
-              Column(
-                children: [
-                  Image.network(
-                    'https://cdn.pixabay.com/photo/2021/09/08/15/24/couple-6607143_960_720.jpg',
-                    width: 100,
-                    height: 100,
-                    fit: BoxFit.cover,
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text('택시', style: TextStyle(fontSize: 20)),
-                ],
-              ),
-            ],
+      body: _screens[_index],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _index,
+        onTap: (index) {
+          setState(() {
+            _index = index;
+          });
+        },
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'kakao T'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.watch),
+            label: '카운터',
           ),
-          SizedBox(
-            height: 150,
-            child: PageView(
-              /// [PageView.scrollDirection] defaults to [Axis.horizontal].
-              /// Use [Axis.vertical] to scroll vertically.
-              scrollDirection: Axis.horizontal,
-              controller: controller,
-              children: <Widget>[
-                Ad(), // 컴포넌트 디렉토리에 'ad'파일 만들어서 구현하고, 'Ad()'로 임포트함.
-                Ad(),
-                Ad(),
-              ],
-            ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.fitness_center),
+            label: 'BMI',
           ),
         ],
       ),
