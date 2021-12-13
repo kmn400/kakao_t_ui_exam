@@ -1,13 +1,19 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:kakao_t_ui_exam/data/fake_data.dart';
-import 'package:kakao_t_ui_exam/ui/kakao_t/component/ad_widget.dart';
 import 'package:kakao_t_ui_exam/ui/kakao_t/detail_screen.dart';
 
 import 'component/menu_widget.dart';
 
-class kakaoTScreen extends StatelessWidget {
+class kakaoTScreen extends StatefulWidget {
   const kakaoTScreen({Key key}) : super(key: key);
+
+  @override
+  State<kakaoTScreen> createState() => _kakaoTScreenState();
+}
+
+class _kakaoTScreenState extends State<kakaoTScreen> {
+  int _index = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -66,48 +72,41 @@ class kakaoTScreen extends StatelessWidget {
       children: [
         CarouselSlider(
           options: CarouselOptions(
-              height: 150,
-              viewportFraction: 0.8,
-              enableInfiniteScroll: true,
-              autoPlay: true,
-              autoPlayCurve: Curves.ease,
-              onPageChanged: (index, _) {
-                setState(() {
-                  _index = index;
-                });
-              }),
-          items: fakeAds.map((Ad e) => AdView(ad: e)).toList(),
-        ),
-        Expanded(
-          child: Align(
-            alignment: Alignment.bottomCenter,
-            child: Row(
-              children: fakeAds.asMap().entries.map((e) {
-                return Container(
-                  width: 12.0,
-                  height: 12.0,
-                  margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: e.key == _index ? Colors.black : Colors.grey,
+            height: 150,
+            viewportFraction: 0.8,
+            enableInfiniteScroll: true,
+            autoPlay: true,
+            autoPlayCurve: Curves.ease,
+            onPageChanged: (index, _) {
+              //         // setState(() {
+              //         //   _index = index;
+              //         // });
+              //       }),
+              //   items: fakeAds.map((Ad e) => AdView(ad: e)).toList(),
+              // ),
+              Expanded(
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Row(
+                    children: fakeAds.asMap().entries.map((e) {
+                      return Container(
+                        width: 12.0,
+                        height: 12.0,
+                        margin: EdgeInsets.symmetric(
+                            vertical: 8.0, horizontal: 4.0),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: e.key == _index ? Colors.black : Colors.grey,
+                        ),
+                      );
+                    }).toList(),
                   ),
-                );
-              }).toList(),
-            ),
+                ),
+              );
+            },
           ),
         ),
       ],
-      // children: <Widget>[
-      //   AdView(
-      //     ad: fakeAds[0],
-      //   ),
-      //   AdView(
-      //     ad: fakeAds[1],
-      //   ),
-      //   AdView(
-      //     ad: fakeAds[2],
-      //   ),
-      // ],
     );
   }
 
