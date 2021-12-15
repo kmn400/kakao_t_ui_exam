@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:kakao_t_ui_exam/model/ad.dart';
 
-class Ad extends StatelessWidget {
-  const Ad({Key key}) : super(key: key);
+class AdWidget extends StatelessWidget {
+  final Ad ad;
+  const AdWidget({Key? key, required this.ad}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +18,6 @@ class Ad extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(32.0),
           child: Row(
-
             children: [
               Expanded(
                 child: Column(
@@ -24,16 +25,16 @@ class Ad extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      '일찍 좀 일어나지 그랬어',
+                      ad.title,
                       style: TextStyle(
                         fontSize: 20,
-                        color: Colors.white,
+                        color: ad.color,
                       ),
                     ),
                     Text('기왕 늦은 거 편하게 택시타고 가자',
                         style: TextStyle(
                           fontSize: 10,
-                          color: Colors.black,
+                          color: ad.color,
                         )),
                   ],
                 ),

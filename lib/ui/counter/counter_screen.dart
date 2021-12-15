@@ -3,36 +3,34 @@ import 'package:flutter/material.dart';
 
 //stful
 class CounterScreen extends StatefulWidget {
-  const CounterScreen({Key key}) : super(key: key);
+  const CounterScreen({Key? key}) : super(key: key);
 
   @override
   State<CounterScreen> createState() => _CounterScreenState();
 }
 
 class _CounterScreenState extends State<CounterScreen> {
-
   int _count = -1;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:AppBar(
+      appBar: AppBar(
         title: Text('카운터'),
       ),
-        body: _buildBody(),
+      body: _buildBody(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           setState(() {
             _count++;
           });
-
         },
         child: Icon(Icons.add),
       ),
     );
   }
 
-  Widget _buildBody(){
+  Widget _buildBody() {
     return Center(
       child: Text(
         '$_count',
